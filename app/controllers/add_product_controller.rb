@@ -1,6 +1,6 @@
 class AddProductController < ApplicationController
   def index
-
+    @category = ActiveRecord::Base.connection.execute('SELECT * FROM category')
   end
 
   def create
@@ -9,10 +9,10 @@ class AddProductController < ApplicationController
       Name: params['Name'],
       Description: params['Description'],
       Price: params['Price'],
-      CatId: '1',
+      CatId: params['catId'],
       Image: params['Image']
     }
-    @sql = 'INSERT INTO product (Name, Description, Price, CatId, Image) VALUES(\''+params['Name']+'\',\''+params['Description']+'\',\''+params['Price']+'\', 1,\''+params['Image']+'\')'
-    @records_array = ActiveRecord::Base.connection.execute(@sql)
+    @sql = 'INSERT INTO product (Name, Description, Price, CatId, Image) VALUES(\''+params['Name']+'\',\''+params['Description']+'\',\''+params['Price']+'\','+params['catId']+',\''+params['Image']+'\')'
+    ActiveRecord::Base.connection.execute(@sql)
   end
 end
