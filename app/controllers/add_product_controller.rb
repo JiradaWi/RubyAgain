@@ -21,4 +21,11 @@ class AddProductController < ApplicationController
     ActiveRecord::Base.connection.execute('INSERT INTO category (Name) VALUES (\''+@data+'\')')
     redirect_to('/welcome/index')
   end
+
+  def delete
+    @sql = 'delete from product where Id = '+params[:id];
+    ActiveRecord::Base.connection.execute(@sql)
+    redirect_to('/welcome/index')
+  end
+
 end
