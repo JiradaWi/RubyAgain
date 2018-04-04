@@ -25,7 +25,7 @@ class AddProductController < ApplicationController
   def delete
     @sql = 'delete from product where Id = '+params[:id];
     ActiveRecord::Base.connection.execute(@sql)
-    redirect_to('/welcome/index')
+    #redirect_to('/welcome/index')
   end
 
 end
